@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const SideProjectSchema = mongoose.Schema({
+const SideProjectSchema = new mongoose.Schema({
   name: {
     type: String,
     maxlength: [50, "No longer than 50 characters"],
@@ -13,9 +13,22 @@ const SideProjectSchema = mongoose.Schema({
     maxlength: [200, "No longer than 200 characters"],
     trim: true,
   },
+  keyPoints: [
+    {
+      type: String,
+      maxlength: [200, "No longer than 200 characters"],
+      trim: true,
+    },
+  ],
   category: {
     type: String,
-    enum: ["Front End", "Back End", "JavaScript", "Ruby on Rails"],
+    enum: [
+      "Front End",
+      "Back End",
+      "Full Stack",
+      "JavaScript",
+      "Ruby on Rails",
+    ],
     message: "Please enter: Front End, Back End, JavaScript, Ruby on Rails",
     required: [true, "Please enter category"],
   },

@@ -4,17 +4,17 @@
 
 exports.getWeather = async (req, res, next) => {
   let weatherData = null;
-  console.log(process.env.WEATHER_KEY);
   try {
     weatherData = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=0f0f5bfa8832e6950137b71289dcb96b`
+      `https://api.openweathermap.org/data/2.5/weather?q=Sydney,au&APPID=${process.env.WEATHER_KEY}`
     )
       .then((response) => response.json())
       .then((data) => {
         return data;
       });
+
+    res.status(200).json(weatherData);
   } catch (err) {
     next(err);
   }
-  res.status(200).json(weatherData);
 };

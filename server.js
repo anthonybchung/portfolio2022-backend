@@ -1,16 +1,24 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
+const cors = require("cors");
 
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/errorhandler.middleware");
 dotenv.config();
-connectDB();
 
 /****************************/
 /* Database connection      */
 /****************************/
+connectDB();
 
+/****************************/
+/* CORS                     */
+/****************************/
+const corsOptions = {
+  origin: ["http://localhost:3000"],
+  optionsSuccessStatus: 200,
+};
 /****************************/
 /* Import router            */
 /****************************/
@@ -23,6 +31,7 @@ const HOST = "0.0.0.0";
 const MODE = process.env.NODE_ENV;
 
 const app = express();
+app.use(cors(corsOptions));
 
 // JSON format
 app.use(express.json());
