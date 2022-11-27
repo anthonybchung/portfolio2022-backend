@@ -1,7 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
+
+const connectDB = require("./config/db");
+const errorHandler = require("./middleware/errorhandler.middleware");
 dotenv.config();
+connectDB();
+
+/****************************/
+/* Database connection      */
+/****************************/
 
 /****************************/
 /* Import router            */
@@ -36,4 +44,6 @@ app.use(
 /* from route               */
 /****************************/
 app.use("/api/v1/side-projects", sideProjects);
+
+app.use(errorHandler);
 module.exports = { app, PORT, HOST, MODE };
