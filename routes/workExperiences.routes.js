@@ -11,5 +11,10 @@ const {
 
 router.route("/").get(getWorkExperiences).post(createWorkExperience);
 
-router.route("/:id").get(getWorkExperience).put(updateWorkExperience),
-  delete deleteWorkExperience;
+router
+  .route("/:id")
+  .get(getWorkExperience)
+  .put(updateWorkExperience)
+  .delete(deleteWorkExperience);
+
+module.exports = router;
