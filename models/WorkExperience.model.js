@@ -12,7 +12,7 @@ const WorkExperienceSchema = new mongoose.Schema({
     type: String,
     maxlength: [100, "No longer than 100 characters"],
   },
-  responsibility: [String],
+  responsibilities: [String],
 });
 
 module.exports = mongoose.model("WorkExperience", WorkExperienceSchema);

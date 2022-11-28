@@ -24,6 +24,7 @@ const corsOptions = {
 /****************************/
 const sideProjects = require("./routes/sideProjects.routes");
 const weather = require("./routes/weatherApp.routes");
+const workExperiences = require("./routes/workExperiences.routes");
 
 //Server details
 const PORT = process.env.PORT || 5000;
@@ -55,6 +56,7 @@ app.use(
 /****************************/
 app.use("/api/v1/side-projects", sideProjects);
 app.use("/api/v1/weather", weather);
+app.use("/api/v1/work-experiences", workExperiences);
 
 app.use(errorHandler);
 module.exports = { app, PORT, HOST, MODE };
