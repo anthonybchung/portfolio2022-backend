@@ -3,20 +3,20 @@ const mongoose = require("mongoose");
 const SideProjectSchema = new mongoose.Schema({
   name: {
     type: String,
-    maxlength: [50, "No longer than 50 characters"],
+    maxlength: [100, "No longer than 50 characters"],
     trim: true,
     unique: true,
     required: [true, "Please enter name"],
   },
   description: {
     type: String,
-    maxlength: [200, "No longer than 200 characters"],
+    maxlength: [300, "No longer than 200 characters"],
     trim: true,
   },
   keyPoints: [
     {
       type: String,
-      maxlength: [200, "No longer than 200 characters"],
+      maxlength: [300, "No longer than 200 characters"],
       trim: true,
     },
   ],
@@ -26,8 +26,10 @@ const SideProjectSchema = new mongoose.Schema({
       "Front End",
       "Back End",
       "Full Stack",
-      "JavaScript",
       "Ruby on Rails",
+      "MERN Stack",
+      "JavaScript",
+      "Ruby",
     ],
     message: "Please enter: Front End, Back End, JavaScript, Ruby on Rails",
     required: [true, "Please enter category"],
@@ -38,6 +40,10 @@ const SideProjectSchema = new mongoose.Schema({
   },
   urlLink: {
     type: String,
+  },
+  priority: {
+    type: Number,
+    unique: true,
   },
 });
 

@@ -4,7 +4,7 @@ const SideProject = require("../models/SideProject.model");
 // by: Anthony Chung
 exports.getSideProjects = async (req, res, next) => {
   try {
-    const sideProjects = await SideProject.find();
+    const sideProjects = await SideProject.find().sort({ priority: "desc" });
 
     res.status(200).json(sideProjects);
   } catch (err) {
