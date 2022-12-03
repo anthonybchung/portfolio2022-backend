@@ -15,10 +15,16 @@ connectDB();
 /****************************/
 /* CORS                     */
 /****************************/
-const corsOptions = {
-  origin: ["https://www.abchungstack.com/"],
-  optionsSuccessStatus: 200,
-};
+var whitelist = ['https://www.abchungstack.com', 'http://abchungstack.com']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 /****************************/
 /* Import router            */
 /****************************/
