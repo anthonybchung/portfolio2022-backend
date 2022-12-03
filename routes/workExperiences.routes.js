@@ -9,12 +9,13 @@ const {
   deleteWorkExperience,
 } = require("../controllers/workExperiences.controllers");
 
-router.route("/").get(getWorkExperiences).post(createWorkExperience);
+const { protect } = require("../middleware/auth");
+router.route("/").get(getWorkExperiences).post(protect, createWorkExperience);
 
 router
   .route("/:id")
   .get(getWorkExperience)
-  .put(updateWorkExperience)
-  .delete(deleteWorkExperience);
+  .put(protect, updateWorkExperience)
+  .delete(protect, deleteWorkExperience);
 
 module.exports = router;

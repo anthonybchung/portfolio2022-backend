@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const bcrypt = reqwuire("bcryptjs");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 
@@ -13,6 +13,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please enter password"],
   },
+  approved: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // Encrypt password pre-save(before saving)
@@ -25,3 +29,24 @@ UserSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, salt);
   this.name = this.name.toLowerCase();
 });
+
+// Sign JWT and return.
+UserSchema.methods.getSignedJwtToken = function () {
+  return jwt.sign(
+    {
+      id: this._id,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: process.env.JWT_EXPIRE,
+    }
+  );
+};
+
+//Match user entered password to hashed password in database.
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  const authPassword = await bcrypt.compare(enteredPassword, this.password);
+  return authPassword && this.approved;
+};
+
+module.exports = mongoose.model("User", UserSchema);
